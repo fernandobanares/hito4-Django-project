@@ -18,9 +18,13 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 from web import views
+from web.views import contacto, exito
 
 urlpatterns = [
     path('', views.index, name='index'),
+    path('admin/', admin.site.urls),
     path('acerca/', views.acerca, name='acerca'),
     path('bienvenido/', views.bienvenido, name='bienvenido'),
+    path('contacto/', contacto, name='contacto'),
+    path('exito/', exito, name='exito'),
 ]
