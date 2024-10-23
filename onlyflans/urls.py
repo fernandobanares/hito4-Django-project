@@ -19,12 +19,16 @@ from django.contrib import admin
 from django.urls import path, include
 from web import views
 from web.views import contacto, exito
+from django.contrib.auth.views import LogoutView
 
 urlpatterns = [
     path('', views.index, name='index'),
     path('admin/', admin.site.urls),
+    path('accounts/', include('django.contrib.auth.urls')),
+    path('accounts/logout/', LogoutView.as_view(), name='logout'),
     path('acerca/', views.acerca, name='acerca'),
     path('bienvenido/', views.bienvenido, name='bienvenido'),
     path('contacto/', contacto, name='contacto'),
     path('exito/', exito, name='exito'),
+    path('flan/<int:flan_id>/', views.flan_detalle, name='flan_detalle'),
 ]

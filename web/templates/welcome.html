@@ -2,7 +2,8 @@
 
 {% block content %}
 <div class="container mt-4">
-    <h1>Bienvenido</h1>
+    <h1>¡Bienvenido, {{ user.get_username }}!</h1>
+    <p>Esta es tu página de bienvenida. Aquí puedes encontrar flanes exclusivos solo para usuarios registrados.</p>
     <div class="row">
         {% for flan in flanes %}
             <div class="col-md-4 mb-4">
@@ -11,7 +12,22 @@
                     <div class="card-body">
                         <h5 class="card-title">{{ flan.name }}</h5>
                         <p class="card-text">{{ flan.description }}</p>
-                        <a href="#" class="btn btn-primary">Ver más</a>
+                        <p class="card-text">Precio: ${{ flan.precio }}</p> <!-- Mostrar precio -->
+                        <form method="post">
+                            {% csrf_token %}
+                            <input type="hidden" name="flan_id" value="{{ flan.id }}">
+                            <div class="form-group">
+                                <label for="comentario">Deja un comentario:</label>
+                                <textarea class="form-control" id="comentario" name="comentario" required></textarea>
+                            </div>
+                            <button type="submit" class="btn btn-secondary">Enviar</button>
+                        </form>
+                        <h6>Comentarios:</h6>
+                        {% for comentario in flan.comentarios.all %}
+                            <p><strong>{{ comentario.usuario.username }}:</strong> {{ comentario.texto }} - {{ comentario.fecha_creacion }}</p>
+                        {% empty %}
+                            <p>No hay comentarios para este flan.</p>
+                        {% endfor %}
                     </div>
                 </div>
             </div>
@@ -19,5 +35,8 @@
             <p>No hay flanes privados disponibles.</p>
         {% endfor %}
     </div>
+    <footer class="mt-4">
+        <p class="text-center">© 2024 OnlyFlans. Todos los derechos reservados.</p>
+    </footer>
 </div>
 {% endblock %}

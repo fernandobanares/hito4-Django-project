@@ -40,6 +40,10 @@ INSTALLED_APPS = [
     'web',
 ]
 
+LOGIN_REDIRECT_URL = 'bienvenido'
+
+LOGOUT_REDIRECT_URL = 'index'
+
 MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",
     "django.contrib.sessions.middleware.SessionMiddleware",
