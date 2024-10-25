@@ -11,7 +11,8 @@
                     <div class="card-body">
                         <h5 class="card-title">{{ flan.name }}</h5>
                         <p class="card-text">{{ flan.description }}</p>
-                        <a href="#" class="btn btn-primary">Ver más</a>
+                        <a href="{% url 'flan_detalle' flan_id=flan.id %}" class="btn btn-primary">Ver más</a>
+
                     </div>
                 </div>
             </div>
