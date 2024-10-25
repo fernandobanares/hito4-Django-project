@@ -1,8 +1,10 @@
 from django.shortcuts import render, redirect
-from .models import Flan
+from .models import Flan, Comentario
 from .forms import ContactFormModelForm
 from django.http import HttpResponseRedirect
 from django.contrib.auth.decorators import login_required
+from django.shortcuts import get_object_or_404
+
 
 def index(request):
     flanes_publicos = Flan.objects.filter(is_private=False)
